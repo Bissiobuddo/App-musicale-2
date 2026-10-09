@@ -3,8 +3,11 @@ export default {
   title: 'Home',
   render(el, { views }) {
     el.innerHTML = `
-      <h1>Armonia</h1>
-      <p class="muted">Il tuo riferimento musicale tascabile: accordi, scale, intervalli, armonia e strumenti utili. Tocca qualsiasi tasto, diagramma o pulsante ▶ per ascoltare.</p>
+      <section class="card hero">
+        <h1>ARMONIA</h1>
+        <p class="muted" style="max-width:560px">Il tuo riferimento musicale tascabile: accordi, scale, intervalli, armonia e strumenti utili. Tocca qualsiasi tasto, diagramma o pulsante ▶ per ascoltare.</p>
+        <div class="eq" aria-hidden="true">${'<span></span>'.repeat(18)}</div>
+      </section>
       <div class="home-grid">
         ${views.map((v) => `<a class="card home-card" href="#/${v.id}"><div class="ico">${v.icon}</div><h3>${v.title}</h3><p class="muted small">${v.desc}</p></a>`).join('')}
       </div>

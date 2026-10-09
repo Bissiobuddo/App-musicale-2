@@ -1,6 +1,6 @@
 // Service worker: rende l'app disponibile offline.
 // Aumenta VERSION ad ogni rilascio per aggiornare la cache.
-const VERSION = 'armonia-v1';
+const VERSION = 'armonia-v2';
 const ASSETS = [
   './', 'index.html', 'manifest.webmanifest', 'css/style.css',
   'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/maskable-512.png',

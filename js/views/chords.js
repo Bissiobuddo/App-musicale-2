@@ -112,7 +112,7 @@ export default {
         <div class="card tbl-wrap">
           <table>
             <tr><th>Nota</th><th>Intervallo dalla fondamentale</th><th>Semitoni</th><th>Ruolo nell’accordo</th></tr>
-            ${notes.map((n, i) => `<tr><td><b>${noteName(n)}</b></td><td><span class="pill" style="background:var(--${intClass(c.ints[i]) === 'tone' ? 'tone' : intClass(c.ints[i])});color:#fff;border:0">${intLabel(c.ints[i])}</span> ${INTERVALS[c.ints[i]].name}</td><td>${INTERVALS[c.ints[i]].semi}</td><td class="small">${INTERVAL_ROLE[c.ints[i]] || ''}</td></tr>`).join('')}
+            ${notes.map((n, i) => `<tr><td><b>${noteName(n)}</b></td><td><span class="pill int-${intClass(c.ints[i])}">${intLabel(c.ints[i])}</span> ${INTERVALS[c.ints[i]].name}</td><td>${INTERVALS[c.ints[i]].semi}</td><td class="small">${INTERVAL_ROLE[c.ints[i]] || ''}</td></tr>`).join('')}
           </table>
         </div>
         <h3 style="margin-top:1rem">Come è costruito (intervalli tra note vicine)</h3>

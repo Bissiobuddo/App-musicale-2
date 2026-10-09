@@ -37,6 +37,10 @@ export function segmented(name, options, selected) {
 
 // ---------- Pianoforte ----------
 const WHITE_PCS = [0, 2, 4, 5, 7, 9, 11];
+const PIANO_DEFS = `<defs>
+  <linearGradient id="pkW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9d4ff"/><stop offset=".85" stop-color="#f7f5ff"/><stop offset="1" stop-color="#c9c2f0"/></linearGradient>
+  <linearGradient id="pkB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a1530"/><stop offset=".9" stop-color="#2c2550"/><stop offset="1" stop-color="#4a3f80"/></linearGradient>
+</defs>`;
 const isBlack = (m) => !WHITE_PCS.includes(((m % 12) + 12) % 12);
 
 /**
@@ -62,7 +66,7 @@ export function pianoSVG({ from = 48, to = 72, marks = new Map(), height = 120 }
     }
     return `<g data-midi="${k.m}" class="pk"><rect x="${k.x}" y="0" width="${w}" height="${h}" rx="${black ? 3 : 4}" class="${cls}"/>${label}</g>`;
   };
-  return `<svg class="piano" viewBox="-1 -1 ${x + 2} ${H + 2}" role="img" aria-label="Tastiera">${whites.map((k) => key(k, false)).join('')}${blacks.map((k) => key(k, true)).join('')}</svg>`;
+  return `<svg class="piano" viewBox="-1 -1 ${x + 2} ${H + 2}" role="img" aria-label="Tastiera">${PIANO_DEFS}${whites.map((k) => key(k, false)).join('')}${blacks.map((k) => key(k, true)).join('')}</svg>`;
 }
 
 // Rende suonabili i tasti del pianoforte dentro un contenitore
@@ -154,4 +158,4 @@ export function intClass(sym) {
   return 'tone';
 }
 
-export const LEGEND = `<div class="legend"><span><i style="background:var(--root)"></i>Fondamentale</span><span><i style="background:var(--third)"></i>Terza</span><span><i style="background:var(--tone)"></i>Quinta / altri</span><span><i style="background:var(--seventh)"></i>Settima</span></div>`;
+export const LEGEND = `<div class="legend"><span><i class="int-root"></i>Fondamentale</span><span><i class="int-third"></i>Terza</span><span><i class="int-tone"></i>Quinta / altri</span><span><i class="int-seventh"></i>Settima</span></div>`;

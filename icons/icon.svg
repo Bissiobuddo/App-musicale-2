@@ -1,7 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="112" fill="#14161c"/>
-  <circle cx="256" cy="256" r="178" fill="none" stroke="#f2a541" stroke-width="28"/>
-  <rect x="268" y="132" width="26" height="196" fill="#e8eaf0"/>
-  <path d="M294 132 C 330 150 362 170 352 226 C 344 196 320 186 294 182 Z" fill="#e8eaf0"/>
-  <ellipse cx="236" cy="334" rx="62" ry="46" transform="rotate(-22 236 334)" fill="#e8eaf0"/>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff2d95"/><stop offset=".45" stop-color="#e040fb"/><stop offset=".7" stop-color="#9b5cff"/><stop offset="1" stop-color="#22e4ff"/>
+    </linearGradient>
+    <radialGradient id="bg" cx=".5" cy=".35" r=".8"><stop offset="0" stop-color="#22123f"/><stop offset="1" stop-color="#0b0716"/></radialGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <g filter="url(#glow)">
+    <circle cx="256" cy="256" r="176" fill="none" stroke="url(#g)" stroke-width="24"/>
+    <g fill="url(#g)">
+      <rect x="268" y="132" width="26" height="196"/>
+      <path d="M294 132 C 330 150 362 170 352 226 C 344 196 320 186 294 182 Z"/>
+      <ellipse cx="236" cy="334" rx="62" ry="46" transform="rotate(-22 236 334)"/>
+    </g>
+  </g>
 </svg>

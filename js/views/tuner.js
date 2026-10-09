@@ -60,7 +60,8 @@ export default {
         <div class="tuner-note" id="tNote">—</div>
         <div class="tuner-freq" id="tFreq">&nbsp;</div>
         <svg class="gauge" viewBox="0 0 300 170">
-          <path d="M 30 150 A 120 120 0 0 1 270 150" fill="none" stroke="var(--border)" stroke-width="10"/>
+          <defs><linearGradient id="gaugeGrad" x1="0" x2="1"><stop offset="0" stop-color="#ff2d95"/><stop offset=".35" stop-color="#9b5cff"/><stop offset=".5" stop-color="#39ff9f"/><stop offset=".65" stop-color="#9b5cff"/><stop offset="1" stop-color="#ff2d95"/></linearGradient></defs>
+          <path d="M 30 150 A 120 120 0 0 1 270 150" fill="none" stroke="url(#gaugeGrad)" stroke-width="10" stroke-linecap="round" class="gauge-arc"/>
           <path d="M 131.2 31.5 A 120 120 0 0 1 168.8 31.5" class="zone"/>
           ${[-50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50].map((c) => {
             const a = (c / 50) * (Math.PI / 2) - Math.PI / 2;
@@ -69,7 +70,7 @@ export default {
           }).join('')}
           <text x="30" y="168" fill="var(--muted)" font-size="11">−50</text><text x="270" y="168" fill="var(--muted)" font-size="11">+50</text>
           <line class="needle" id="needle" x1="150" y1="150" x2="150" y2="40"/>
-          <circle cx="150" cy="150" r="7" fill="var(--accent)"/>
+          <circle cx="150" cy="150" r="8" class="hub"/>
         </svg>
         <div class="tuner-status" id="tStatus">Premi “Avvia” per iniziare</div>
         <button class="btn primary big" id="micBtn" style="margin-top:1rem">🎙️ Avvia</button>

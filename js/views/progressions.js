@@ -162,7 +162,7 @@ export default {
           <div><span class="muted small">Accordo ${sel + 1} di ${chords.length}</span><div class="big-name">${chordSymbol(c.root, c.type)} <small class="fn-${c.fn}" style="font-size:1rem">${c.roman} · ${FUNCTION_NAMES[c.fn]}</small></div></div>
           <div class="row"><button class="btn" id="aPrev">◀</button><button class="btn" id="aArp">▶ Arpeggio</button><button class="btn" id="aNext">▶▶</button></div>
         </div>
-        <p><b>Note dell’accordo (sicure, per i tempi forti):</b> ${c.notes.map((n, k) => `<span class="pill" style="background:var(--${intClass(ints[k])});color:#fff;border:0">${noteName(n)} <small>${intLabel(ints[k])}</small></span>`).join(' ')}</p>
+        <p><b>Note dell’accordo (sicure, per i tempi forti):</b> ${c.notes.map((n, k) => `<span class="pill int-${intClass(ints[k])}">${noteName(n)} <small>${intLabel(ints[k])}</small></span>`).join(' ')}</p>
         <p><b>Note di passaggio (scala, per i tempi deboli):</b> ${scale.map((n) => `<span class="pill">${noteName(n)}</span>`).join(' ')}</p>
         <p><b>Note in comune con ${chordSymbol(next.root, next.type)}:</b> ${common.length ? common.map((n) => `<span class="pill tone">${noteName(n)}</span>`).join(' ') : '<span class="muted">nessuna — muoviti per grado verso una nota del prossimo accordo</span>'}</p>
         ${pianoSVG({ from: 60, to: 84, marks, height: 100 })}
@@ -240,7 +240,7 @@ export default {
         const s = spell(n.midi, chords[i]);
         return `<span class="${n.ct ? 'ct' : 'pt'}">${s ? noteName(s) : n.midi}</span>`;
       }).join(' ')}</div>`).join('')}</div>
-      <p class="small muted" style="margin-top:.5rem"><span style="color:var(--accent);font-weight:700">Arancione</span> = nota dell’accordo · grigio = nota di passaggio. Premi ▶ Suona per ascoltarla sopra il giro.</p>`;
+      <p class="small muted" style="margin-top:.5rem"><span class="ct" style="color:var(--yellow);font-weight:700">Giallo</span> = nota dell’accordo · grigio = nota di passaggio. Premi ▶ Suona per ascoltarla sopra il giro.</p>`;
     };
 
     // ---------- Riproduzione ----------
