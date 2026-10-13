@@ -55,7 +55,7 @@ export default {
 
     const schedule = () => {
       const c = ac();
-      while (nextTime < c.currentTime + 0.12) {
+      while (nextTime < c.currentTime + (document.hidden ? 1.5 : 0.12)) { // in background i timer rallentano
         const beat = Math.floor(step / st.sub) % st.beats;
         const isSub = step % st.sub !== 0;
         const acc = st.accents[beat];

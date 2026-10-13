@@ -10,6 +10,7 @@ import progressions from './views/progressions.js';
 import circle from './views/circle.js';
 import tuner from './views/tuner.js';
 import metronome from './views/metronome.js';
+import { mountBacking, refreshBacking } from './backing.js';
 
 export const VIEWS = [chords, triads, intervals, scales, inversions, progressions, circle, tuner, metronome];
 const routes = Object.fromEntries([home, ...VIEWS].map((v) => [v.id, v]));
@@ -49,6 +50,7 @@ nt.addEventListener('click', (e) => {
   setNotation(b.dataset.v);
   syncNt();
   render();
+  refreshBacking();
 });
 syncNt();
 
@@ -65,6 +67,7 @@ document.addEventListener('click', (e) => {
   seg.dispatchEvent(new CustomEvent('segchange', { bubbles: true, detail: { name: seg.dataset.seg, value: b.dataset.v } }));
 });
 
+mountBacking(document.body);
 render();
 
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {

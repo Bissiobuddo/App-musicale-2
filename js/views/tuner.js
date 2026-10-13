@@ -47,7 +47,8 @@ export default {
   desc: 'Accordatore cromatico con microfono per chitarra, ukulele e basso, più note di riferimento.',
   render(el) {
     const st = store('tuner', { inst: 'guitar', a4: 440 });
-    let stream = null, raf = 0, analyser = null, buf = null, smooth = null, frame = 0;
+    let stream = null, raf = 0, analyser = null, buf = null, smooth = null, frame = 0, src = null;
+    let alive = true, pending = false;
 
     el.innerHTML = `
       <h1>Accordatore</h1>
@@ -121,17 +122,23 @@ export default {
     const stopMic = () => {
       cancelAnimationFrame(raf);
       if (stream) stream.getTracks().forEach((t) => t.stop());
+      if (src) src.disconnect();
       stream = null;
+      src = null;
       const b = $('#micBtn', el);
       if (b) b.textContent = '🎙️ Avvia';
     };
 
     $('#micBtn', el).onclick = async () => {
       if (stream) { stopMic(); $('#tStatus', el).textContent = 'In pausa'; return; }
+      if (pending) return; // permesso del microfono già richiesto
+      pending = true;
+      const c = ac(); // va creato dentro il tocco, prima dell'attesa (iOS)
       try {
-        stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
-        const c = ac();
-        const src = c.createMediaStreamSource(stream);
+        const s = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
+        if (!alive) { s.getTracks().forEach((t) => t.stop()); return; } // l'utente ha cambiato pagina nel frattempo
+        stream = s;
+        src = c.createMediaStreamSource(stream);
         analyser = c.createAnalyser();
         analyser.fftSize = 4096;
         buf = new Float32Array(analyser.fftSize);
@@ -142,6 +149,8 @@ export default {
       } catch (err) {
         $('#tStatus', el).textContent = 'Microfono non disponibile: ' + (err.message || err.name);
         stream = null;
+      } finally {
+        pending = false;
       }
     };
     $('#strings', el).addEventListener('click', (e) => {
@@ -151,6 +160,6 @@ export default {
     $('#a4', el).onchange = (e) => { st.a4 = Math.max(415, Math.min(466, +e.target.value || 440)); e.target.value = st.a4; };
     el.addEventListener('segchange', (e) => { if (e.detail.name === 'inst') { st.inst = e.detail.value; drawStrings(); } });
     drawStrings();
-    return stopMic;
+    return () => { alive = false; stopMic(); };
   },
 };

@@ -30,7 +30,8 @@ export function closest(prev, midis) {
     for (const o of [-24, -12, 0, 12]) cands.push({ k, m: inv.map((x) => x + o) });
   }
   const cost = (c) => c.m.reduce((s, x, i) => s + Math.abs(x - (prev[i] ?? prev[prev.length - 1])), 0) + Math.abs(c.m[0] - 55) * 0.05;
-  return cands.filter((c) => c.m[0] >= 47 && c.m[c.m.length - 1] <= 79).sort((a, b) => cost(a) - cost(b))[0];
+  const inRange = cands.filter((c) => c.m[0] >= 47 && c.m[c.m.length - 1] <= 79);
+  return (inRange.length ? inRange : cands).sort((a, b) => cost(a) - cost(b))[0];
 }
 
 export default {

@@ -15,6 +15,7 @@ del corso di musica in un unico strumento di consultazione interattivo.
 | 🔁 **Giri d'accordi** | Accordi della tonalità (triadi o quadriadi) con funzione, giri pronti (pop, anni '50, ii–V–I, blues, andalusa…) o personalizzati, riproduzione a tempo. Per ogni accordo: **note sicure per la melodia**, note di passaggio, note in comune con l'accordo successivo e **generatore di melodie**. |
 | ⭕ **Circolo delle quinte** | Interattivo: armature, relative, scala, accordi della tonalità evidenziati sul cerchio, enarmonie. |
 | 🎙️ **Accordatore** | Accordatore cromatico via microfono (chitarra, ukulele, basso) con note di riferimento e La₄ regolabile. |
+| 🥁 **Base musicale** (footer, sempre disponibile) | Basi in loop in 12 stili (pop, rock, ballata, blues shuffle, jazz swing, bossa nova, reggae, funk, valzer, country, dance, lo-fi) con batteria, basso e accompagnamento. Si cambiano tonalità (maggiore/minore), tempo 4/4 o 3/4, BPM (con tap), strumento (pianoforte, piano elettrico, chitarra, organo, synth pad) e ogni singolo accordo del giro, anche mentre suona. |
 | ⏱️ **Metronomo** | 30–260 BPM, tempi in battuta, accenti per battito, suddivisioni, tap tempo, schermo sempre acceso. |
 
 Notazione selezionabile in alto: **Do Re Mi** oppure **C D E**. Le note sono scritte con l'enarmonia
@@ -58,7 +59,8 @@ index.html            shell dell'app
 css/style.css         stile (tema chiaro/scuro automatico)
 js/theory.js          teoria: note, intervalli, accordi, scale, tonalità
 js/voicings.js        ricerca automatica delle diteggiature su chitarra/ukulele
-js/audio.js           sintetizzatore Web Audio
+js/backing.js         base musicale: stili, pattern, scheduler e footer
+js/audio.js           sintetizzatore Web Audio (strumenti, basso, batteria)
 js/ui.js              tastiera, diagrammi, manico (SVG)
 js/views/*.js         una vista per sezione
 sw.js                 service worker (offline) — aumenta VERSION ad ogni rilascio

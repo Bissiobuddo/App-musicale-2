@@ -256,7 +256,7 @@ export default {
       const vs = voicings(chords);
       const beat = 60 / st.bpm;
       const bar = beat * st.beats;
-      while (nextTime < c.currentTime + 0.25) {
+      while (nextTime < c.currentTime + (document.hidden ? 1.6 : 0.25)) {
         if (nextIdx >= chords.length) {
           if (!st.loop) { const end = (nextTime - c.currentTime) * 1000; timeouts.push(setTimeout(stop, end)); clearInterval(timer); timer = null; return; }
           nextIdx = 0;
